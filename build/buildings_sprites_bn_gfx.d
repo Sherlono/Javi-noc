@@ -1,0 +1,1 @@
+buildings_sprites_bn_gfx.o: buildings_sprites_bn_gfx.s
