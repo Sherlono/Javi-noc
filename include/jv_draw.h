@@ -5,8 +5,11 @@
 #include "bn_sprite_tiles_ptr.h"
 #include "bn_vector.h"
 
+#include "jv_buildings.h"
 #include "bn_sprite_items_cable.h"
 #include "bn_sprite_items_person.h"
+
+const char MAXBUILDINGS = 7;
 
 namespace jv{
 void draw_person(bn::vector<bn::sprite_ptr, 4> &sprite_vector, bn::sprite_ptr &sprite, unsigned char frame, int x, int y){
@@ -23,6 +26,20 @@ void draw_cable(bn::vector<bn::sprite_ptr, 4> &sprite_vector, bn::sprite_ptr &sp
         sprite.set_bg_priority(0);
         sprite_vector.push_back(sprite);
     }
+}
+
+void builder(bn::vector<jv::Building*, MAXBUILDINGS> &buildings_vector, bn::random &randomizer, int x, int y){
+    jv::Building* building;
+    unsigned char random = randomizer.get_int(11);
+    if(random < 3){
+        building = new jv::Small(random, x, y);
+    }else if(random < 6){
+        building = new jv::Medium(random, x, y);
+    }else{
+        building = new jv::Big(random, x, y);
+    }
+    building->set_position(building->x() - building->_width/2, building->y());
+    buildings_vector.push_back(building);
 }
 }
 

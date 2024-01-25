@@ -26,11 +26,12 @@ main.o: \
  C:/Users/javie/Desktop/GBADEV/butano-master/butano/include/bn_vblank_callback_type.h \
  C:/Users/javie/Desktop/GBADEV/butano-master/butano/include/bn_random.h \
  C:/Users/javie/Desktop/GBADEV/butano-master/butano/include/bn_limits.h \
+ C:/Users/javie/Desktop/GBADEV/butano-master/butano/include/bn_keypad.h \
+ C:/Users/javie/Desktop/GBADEV/butano-master/butano/include/bn_fixed.h \
  C:/Users/javie/Desktop/GBADEV/butano-master/butano/include/bn_sprite_ptr.h \
  C:/Users/javie/Desktop/GBADEV/butano-master/butano/include/bn_optional.h \
  C:/Users/javie/Desktop/GBADEV/butano-master/butano/include/bn_memory_alias.h \
  C:/Users/javie/Desktop/GBADEV/butano-master/butano/include/bn_sprite_tiles_ptr.h \
- C:/Users/javie/Desktop/GBADEV/butano-master/butano/include/bn_fixed.h \
  C:/Users/javie/Desktop/GBADEV/butano-master/butano/include/bn_regular_bg_ptr.h \
  C:/Users/javie/Desktop/GBADEV/butano-master/games/Javi_noc/include/jv_buildings.h \
  C:/Users/javie/Desktop/GBADEV/butano-master/butano/include/bn_vector.h \
@@ -45,6 +46,7 @@ main.o: \
  C:/Users/javie/Desktop/GBADEV/butano-master/butano/include/bn_sprite_palette_item.h \
  C:/Users/javie/Desktop/GBADEV/butano-master/butano/include/bn_color.h \
  C:/Users/javie/Desktop/GBADEV/butano-master/games/Javi_noc/include/jv_draw.h \
+ C:/Users/javie/Desktop/GBADEV/butano-master/games/Javi_noc/include/jv_buildings.h \
  C:/Users/javie/Desktop/GBADEV/butano-master/games/Javi_noc/build/bn_sprite_items_cable.h \
  C:/Users/javie/Desktop/GBADEV/butano-master/games/Javi_noc/build/bn_sprite_items_person.h \
  C:/Users/javie/Desktop/GBADEV/butano-master/games/Javi_noc/build/bn_regular_bg_items_ground_bg.h \
@@ -55,6 +57,7 @@ main.o: \
  C:/Users/javie/Desktop/GBADEV/butano-master/butano/include/bn_point.h \
  C:/Users/javie/Desktop/GBADEV/butano-master/butano/include/bn_regular_bg_map_cell.h \
  C:/Users/javie/Desktop/GBADEV/butano-master/butano/include/bn_regular_bg_tiles_item.h \
+ C:/Users/javie/Desktop/GBADEV/butano-master/games/Javi_noc/build/bn_sprite_items_hair.h \
  C:/Users/javie/Desktop/GBADEV/butano-master/games/Javi_noc/build/bn_sprite_items_light_post.h
 C:/Users/javie/Desktop/GBADEV/butano-master/butano/include/bn_core.h:
 C:/Users/javie/Desktop/GBADEV/butano-master/butano/include/bn_span.h:
@@ -82,11 +85,12 @@ C:/Users/javie/Desktop/GBADEV/butano-master/butano/include/bn_string_view.h:
 C:/Users/javie/Desktop/GBADEV/butano-master/butano/include/bn_vblank_callback_type.h:
 C:/Users/javie/Desktop/GBADEV/butano-master/butano/include/bn_random.h:
 C:/Users/javie/Desktop/GBADEV/butano-master/butano/include/bn_limits.h:
+C:/Users/javie/Desktop/GBADEV/butano-master/butano/include/bn_keypad.h:
+C:/Users/javie/Desktop/GBADEV/butano-master/butano/include/bn_fixed.h:
 C:/Users/javie/Desktop/GBADEV/butano-master/butano/include/bn_sprite_ptr.h:
 C:/Users/javie/Desktop/GBADEV/butano-master/butano/include/bn_optional.h:
 C:/Users/javie/Desktop/GBADEV/butano-master/butano/include/bn_memory_alias.h:
 C:/Users/javie/Desktop/GBADEV/butano-master/butano/include/bn_sprite_tiles_ptr.h:
-C:/Users/javie/Desktop/GBADEV/butano-master/butano/include/bn_fixed.h:
 C:/Users/javie/Desktop/GBADEV/butano-master/butano/include/bn_regular_bg_ptr.h:
 C:/Users/javie/Desktop/GBADEV/butano-master/games/Javi_noc/include/jv_buildings.h:
 C:/Users/javie/Desktop/GBADEV/butano-master/butano/include/bn_vector.h:
@@ -101,6 +105,7 @@ C:/Users/javie/Desktop/GBADEV/butano-master/butano/include/bn_compression_type.h
 C:/Users/javie/Desktop/GBADEV/butano-master/butano/include/bn_sprite_palette_item.h:
 C:/Users/javie/Desktop/GBADEV/butano-master/butano/include/bn_color.h:
 C:/Users/javie/Desktop/GBADEV/butano-master/games/Javi_noc/include/jv_draw.h:
+C:/Users/javie/Desktop/GBADEV/butano-master/games/Javi_noc/include/jv_buildings.h:
 C:/Users/javie/Desktop/GBADEV/butano-master/games/Javi_noc/build/bn_sprite_items_cable.h:
 C:/Users/javie/Desktop/GBADEV/butano-master/games/Javi_noc/build/bn_sprite_items_person.h:
 C:/Users/javie/Desktop/GBADEV/butano-master/games/Javi_noc/build/bn_regular_bg_items_ground_bg.h:
@@ -111,4 +116,5 @@ C:/Users/javie/Desktop/GBADEV/butano-master/butano/include/bn_size.h:
 C:/Users/javie/Desktop/GBADEV/butano-master/butano/include/bn_point.h:
 C:/Users/javie/Desktop/GBADEV/butano-master/butano/include/bn_regular_bg_map_cell.h:
 C:/Users/javie/Desktop/GBADEV/butano-master/butano/include/bn_regular_bg_tiles_item.h:
+C:/Users/javie/Desktop/GBADEV/butano-master/games/Javi_noc/build/bn_sprite_items_hair.h:
 C:/Users/javie/Desktop/GBADEV/butano-master/games/Javi_noc/build/bn_sprite_items_light_post.h:

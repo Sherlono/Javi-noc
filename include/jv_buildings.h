@@ -26,7 +26,7 @@ public:
     }
 
     bn::fixed _x, _y;
-    int _width;
+    unsigned char _width;
 };
 
 class Small : public Building{

@@ -1,15 +1,17 @@
 #include "bn_core.h"
 #include "bn_random.h"
+#include "bn_keypad.h"
+#include "bn_fixed.h"
 #include "bn_sprite_ptr.h"
 #include "bn_sprite_tiles_ptr.h"
-#include "bn_fixed.h"
 #include "bn_regular_bg_ptr.h"
 
 #include "jv_buildings.h"
 #include "jv_draw.h"
 #include "bn_regular_bg_items_ground_bg.h"
-#include "bn_sprite_items_cable.h"
 #include "bn_sprite_items_person.h"
+#include "bn_sprite_items_hair.h"
+#include "bn_sprite_items_cable.h"
 #include "bn_sprite_items_light_post.h"
 
 int main()
@@ -17,11 +19,12 @@ int main()
     bn::core::init();
     
     bn::random randomizer;
-    unsigned char random;
     bn::regular_bg_ptr background = bn::regular_bg_items::ground_bg.create_bg(0, 0);
 
     // Sprite items load here so they can be fed to drawing function and be handeled there
     bn::sprite_ptr person = bn::sprite_items::person.create_sprite(0, 0);
+    bn::sprite_ptr hair = bn::sprite_items::hair.create_sprite(0, 0);
+    hair.set_bg_priority(0);
     bn::sprite_ptr cable = bn::sprite_items::cable.create_sprite(0, 0);
 
     bn::sprite_ptr post_low = bn::sprite_items::light_post.create_sprite(-152, 128, 1);
@@ -35,23 +38,11 @@ int main()
     unsigned int post_frame = 0;
     bn::vector<bn::sprite_ptr, 4> cable_vector, person_vector;
 
-    const char MAXBUILDINGS = 7;
     bn::vector<jv::Building*, MAXBUILDINGS> buildings_vector;
 
     // Initial buildings
-    int starting_point_y = 16;
-    for(unsigned char b = 0; b < MAXBUILDINGS; b++){
-        jv::Building* building;
-        random = randomizer.get_int(11);
-        if(random < 3){
-            building = new jv::Small(random, -120*2 + (64 + 16) * b, starting_point_y);
-        }else if(random < 6){
-            building = new jv::Medium(random, -120*2 + (64 + 16) * b, starting_point_y);
-        }else{
-            building = new jv::Big(random, -120*2 + (64 + 16) * b, starting_point_y);
-        }
-        building->set_position(building->x() - building->_width/2, building->y());
-        buildings_vector.push_back(building);
+    for(unsigned char i = 0; i < MAXBUILDINGS; i++){
+        jv::builder(buildings_vector, randomizer, -120*2 + (64 + 30) * i, 16);
     }
 
     // Main loop
@@ -64,36 +55,48 @@ int main()
             switch(key_frame){
                 case 0:
                     jv::draw_person(person_vector, person, key_frame, -76, -30);
+                    hair.set_tiles(bn::sprite_items::hair.tiles_item().create_tiles(2));
+                    hair.set_position(-76 + 28, -30 - 6);
                     jv::draw_cable(cable_vector, cable, cable_frame);
                     break;
                 case 1:
                     jv::draw_person(person_vector, person, key_frame, -28, -12);
+                    hair.set_tiles(bn::sprite_items::hair.tiles_item().create_tiles(3));
+                    hair.set_position(-28 + 28, -12 - 6);
                     jv::draw_cable(cable_vector, cable, cable_frame);
-                break;
+                    break;
                 case 2:
                     jv::draw_person(person_vector, person, key_frame, 0, -12);
+                    hair.set_tiles(bn::sprite_items::hair.tiles_item().create_tiles(0));
+                    hair.set_position(0 + 28, -12 - 6);
                     jv::draw_cable(cable_vector, cable, cable_frame);
-                break;
+                    break;
                 case 3:
                     jv::draw_person(person_vector, person, key_frame, -20, -46);
+                    hair.set_tiles(bn::sprite_items::hair.tiles_item().create_tiles(0));
+                    hair.set_position(-20 + 28, -46 - 6);
                     jv::draw_cable(cable_vector, cable, cable_frame);
-                break;
+                    break;
                 case 4:
                     jv::draw_person(person_vector, person, key_frame-1, -50, -50);
+                    hair.set_tiles(bn::sprite_items::hair.tiles_item().create_tiles(1));
+                    hair.set_position(-50 + 28, -50 - 6);
                     jv::draw_cable(cable_vector, cable, cable_frame - 16);      // Same animation as case 3
-                break;
+                    break;
                 case 5:
                     jv::draw_person(person_vector, person, key_frame-1, -70, -38);
+                    hair.set_tiles(bn::sprite_items::hair.tiles_item().create_tiles(2));
+                    hair.set_position(-70 + 28, -38 - 6);
                     jv::draw_cable(cable_vector, cable, cable_frame - 32);      // Same animation as case 3
-                break;
+                    break;
                 default:
                     key_frame = 0;
-                break;
+                    break;
             }
             
             // Buildings
-            for(char i = 0;i < buildings_vector.size(); i++){
-                // Move buildings
+            for(unsigned char i = 0; i < buildings_vector.size(); i++){
+                // Horizontal scroll
                 buildings_vector[i]->set_position(buildings_vector[i]->x() + bn::fixed(0.25), buildings_vector[i]->y());
                 // Delete offscreen buildings
                 if (buildings_vector[i]->x() > 120 + buildings_vector[i]->_width/2) {
@@ -102,32 +105,22 @@ int main()
                 }
             }
             // Refill Buildings vector
-            static int start_point_x = -120 - 64 - 16;
             if(buildings_vector.size() < MAXBUILDINGS){
-                jv::Building* building;
-                random = randomizer.get_int(11);
-                if(random < 3){
-                    building = new jv::Small(random, start_point_x, starting_point_y);
-                }else if(random < 6){
-                    building = new jv::Medium(random, start_point_x, starting_point_y);
-                }else{
-                    building = new jv::Big(random, start_point_x, starting_point_y);
-                }
-                building->set_position(building->x() - building->_width/2, building->y());
-                buildings_vector.push_back(building);
+                jv::builder(buildings_vector, randomizer, -200, 16);
             }
             // Light post
-            static unsigned int delay = 512;
-            unsigned int x_increment = post_frame * 6;
-            if(x_increment > delay){
-                if(post_low.x() < 120 + 32){
-                    for(unsigned p = 0; p < 2; p++){
-                        bn::fixed x = -152 - delay + x_increment;
-                        bn::fixed y = -(post_low.x()-15)*(post_low.x()-15)/600+ 64;
+            unsigned int post_delay = 512;                  // Increasing this makes the post less frequent
+            unsigned int x_increment = post_frame * 6;      // Increasing this makes the post move faster
+            if(x_increment > post_delay){
+                if(post_low.x() < 152){
+                    for(unsigned char i = 0; i < 2; i++){
+                        bn::fixed x = -152 - post_delay + x_increment;
+                        bn::fixed y = -(post_low.x()-15)*(post_low.x()-15)/600 + 64;    // Parabolic arch of post trajectory (Thanks Desmos graphing calculator!)
                         post_low.set_position(x, y + 64);
                         post_high.set_position(x, y);
                     }
                 }else{
+                    // Reset light post
                     post_frame = 0;
                     post_low.set_position(-152, 64);
                     post_high.set_position(-152, 0);
@@ -140,5 +133,14 @@ int main()
             person_vector.clear();
         }
         key_frame++;
+        
+        // Listen, computers really struggle with random number generation so you gotta help it ok?
+        if(bn::keypad::any_held()){
+            randomizer.update();
+        }
+        // Reset combo
+        if(bn::keypad::a_held() && bn::keypad::b_held() && bn::keypad::start_held() && bn::keypad::select_held()){
+                bn::core::reset();
+        }
     }
 }
